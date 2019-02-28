@@ -3,13 +3,13 @@ package com.baimurzin.business.reservation.resertvationbusinessservicess.control
 
 import com.baimurzin.business.reservation.resertvationbusinessservicess.client.RoomService;
 import com.baimurzin.business.reservation.resertvationbusinessservicess.model.Room;
+import com.baimurzin.business.reservation.resertvationbusinessservicess.model.RoomReservation;
+import com.baimurzin.business.reservation.resertvationbusinessservicess.service.RoomReservationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -18,9 +18,15 @@ import java.util.List;
 public class RoomReservationController {
 
     private final RoomService roomService;
+    private final RoomReservationService reservationService;
 
     @GetMapping("/rooms")
-    public List<Room> getAllRooms(){
-        return roomService.findAll(null);
+    public List<Room> getAllRooms(@RequestParam(name="roomNumber", required=false)String roomNumber){
+        return roomService.findAll(roomNumber);
+    }
+
+    @GetMapping(value="/roomReservations/{date}")
+    public List<RoomReservation> getRoomReservationsForDate(@PathVariable("date") String date){
+        return reservationService.getRoomReservationsForDate(date);
     }
 }

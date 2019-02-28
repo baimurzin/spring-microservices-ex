@@ -5,9 +5,7 @@ import com.baimurzin.services.room.roomservices.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,11 @@ public class RoomController {
         if (StringUtils.isNoneBlank(roomNumber))
             return roomRepository.findByRoomNumber(roomNumber);
         return roomRepository.findAll();
+    }
+
+
+    @GetMapping(value="/{id}")
+    public Room findOne(@PathVariable("id")long id){
+        return roomRepository.getOne(id);
     }
 }
