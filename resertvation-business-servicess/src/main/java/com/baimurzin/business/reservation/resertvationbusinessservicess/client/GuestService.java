@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-@FeignClient("GUESTSERVICES")
+@FeignClient(value = "GUESTSERVICES", fallback = GuestServiceFallbackImpl.class)
 public interface GuestService {
     @GetMapping(value="/guests")
     List<Guest> findAll(@RequestParam(name="emailAddress", required = false)String emailAddress);
