@@ -1,14 +1,7 @@
-/*
- * Copyright 2018 by HireRight, Inc. All rights reserved.
- *
- * This software is the confidential and proprietary information
- * of HireRight, Inc. Use is subject to license terms.
- *
- * History:
- * V.Baimurzin 2019-02-28 Created
- */
+
 package com.baimurzin.business.reservation.resertvationbusinessservicess.controller;
 
+import com.baimurzin.business.reservation.resertvationbusinessservicess.client.RoomService;
 import com.baimurzin.business.reservation.resertvationbusinessservicess.model.Room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -24,15 +17,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RoomReservationController {
 
-    private final RestTemplate restTemplate;
+    private final RoomService roomService;
 
     @GetMapping("/rooms")
     public List<Room> getAllRooms(){
-        ResponseEntity<List<Room>> roomsResponse = restTemplate.exchange(
-                "http://ROOMSERVICES/rooms",
-                HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<Room>>() {
-                });
-        return roomsResponse.getBody();
+        return roomService.findAll(null);
     }
 }
