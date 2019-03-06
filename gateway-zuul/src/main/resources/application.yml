@@ -1,0 +1,16 @@
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie
+  routes:
+    reservationapp:
+      path: /reservationapp/**
+      serviceId: reservationapp
+  retryable: true
+  ignored-services: "*"
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: 123
+
+
