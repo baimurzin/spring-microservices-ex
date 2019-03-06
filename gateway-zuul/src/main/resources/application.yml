@@ -4,6 +4,9 @@ zuul:
     reservationapp:
       path: /reservationapp/**
       serviceId: reservationapp
+    oauth:
+      path: /oauth/**
+      serviceId: authserver
   retryable: true
   ignored-services: "*"
 
